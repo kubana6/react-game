@@ -5,7 +5,6 @@ import { Tetris } from './components/tetris/tetris';
 const App: React.FC = () => {
   return (
     <div className="App">
-      Hell
       <Tetris />
     </div>
   );

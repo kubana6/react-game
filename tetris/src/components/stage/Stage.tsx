@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cell } from '../cell/cell';
+import Cell from '../cell/cell';
 import { StyledStage } from './style/StyledStage';
 
 export const Stage: React.FC<any> = ({ stage }) => {
