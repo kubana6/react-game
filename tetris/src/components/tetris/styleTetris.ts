@@ -23,8 +23,3 @@ export const StyledTetris = styled.div`
     padding: 0 20px;
   }
 `;
-interface typeTetrisWraper {
-  role: string;
-  tabIndex: string;
-  onKeyDown: (e: Event) => void;
-}
