@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background: url('./img/bg.png') #000;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .App-logo {

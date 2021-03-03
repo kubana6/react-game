@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { SOUND_GAME_OVER } from '../../constants';
 import { checkCollision, createStage } from '../../gameHelpers';
 import { useGameStatus } from '../../hocks/useGameStatus';
 import { useInterval } from '../../hocks/useInterval';
 import { usePlayer } from '../../hocks/usePlayer';
 import { useStage } from '../../hocks/useStage';
 import { Display } from '../display/Display';
+import { createAudio } from '../header/components/audio/createAudio';
 import { Stage } from '../stage/Stage';
 import { StartButton } from '../StartButton/StartButton';
 import { StyledTetris, StyledTetrisWrapper } from './styleTetris';
@@ -22,7 +25,9 @@ export const Tetris: React.FC = ({ type }: any) => {
       updatePlayerPos({ x: dir, y: 0 });
     }
   };
-
+  const { isPlaySound, volumeSound, sound } = useSelector(
+    (state: any) => state.audioReducers
+  );
   const startGame = () => {
     setStage(createStage());
     setDropTime(1000);
@@ -40,10 +45,14 @@ export const Tetris: React.FC = ({ type }: any) => {
     }
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPos({ x: 0, y: 1, collided: false });
+      playAudio();
     } else {
       if (player.pos.y < 1) {
         console.log('gameOver');
         setGameOver(true);
+        if (isPlaySound) {
+          createAudio(SOUND_GAME_OVER, volumeSound);
+        }
         setDropTime(null);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
@@ -78,6 +87,15 @@ export const Tetris: React.FC = ({ type }: any) => {
   interface typeKeyCode {
     keyCode: number;
   }
+
+  const playAudio = () => {
+    if (isPlaySound) {
+      sound.currentTime = 0;
+      sound.volume = volumeSound / 100;
+      sound.play();
+    }
+  };
+
   useInterval(() => {
     drop();
   }, dropTime);
