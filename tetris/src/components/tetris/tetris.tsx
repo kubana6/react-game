@@ -1,3 +1,9 @@
+import {
+  ArrowBack,
+  ArrowDownward,
+  ArrowForward,
+  ArrowUpward,
+} from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { SOUND_GAME_OVER } from '../../constants';
@@ -25,12 +31,12 @@ export const Tetris: React.FC = ({ type }: any) => {
       updatePlayerPos({ x: dir, y: 0 });
     }
   };
-  const { isPlaySound, volumeSound, sound } = useSelector(
+  const { isPlaySound, volumeSound, sound, interval } = useSelector(
     (state: any) => state.audioReducers
   );
   const startGame = () => {
     setStage(createStage());
-    setDropTime(1000);
+    setDropTime(interval);
     resetPlayer();
     setGameOver(false);
     setScore(0);
@@ -41,7 +47,7 @@ export const Tetris: React.FC = ({ type }: any) => {
     if (rows > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
 
-      setDropTime(1000 / (level + 1) + 200);
+      setDropTime(interval / (level + 1) + 200);
     }
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPos({ x: 0, y: 1, collided: false });
@@ -62,7 +68,7 @@ export const Tetris: React.FC = ({ type }: any) => {
   const keyUp = ({ keyCode }: typeKeyCode) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        setDropTime(1000 / (level + 1) + 200);
+        setDropTime(interval / (level + 1) + 200);
       }
     }
   };
@@ -108,6 +114,9 @@ export const Tetris: React.FC = ({ type }: any) => {
     >
       <StyledTetris>
         <Stage stage={stage} />
+        <div>
+          <ArrowBack />
+        </div>
         <aside>
           {gameOver ? (
             <Display gameOver={gameOver} text="Game Over" />
@@ -118,7 +127,47 @@ export const Tetris: React.FC = ({ type }: any) => {
               <Display text={`Level ${level}`} />
             </div>
           )}
+
           <StartButton callback={startGame} />
+          <div className="keyBoard">
+            <div
+              className="arrow"
+              onClick={() => {
+                move({ keyCode: 38 });
+              }}
+            >
+              <ArrowUpward color="primary" />
+            </div>
+
+            <div className="arrowsLeftAndRigth">
+              <div
+                className="arrow"
+                onClick={() => {
+                  move({ keyCode: 37 });
+                }}
+              >
+                <ArrowBack color="primary" />
+              </div>
+              <div
+                className="arrow"
+                onClick={() => {
+                  move({ keyCode: 39 });
+                }}
+              >
+                <ArrowForward color="primary" />
+              </div>
+            </div>
+
+            <div
+              className="arrow"
+              onClick={() => {
+                move({ keyCode: 40 });
+                keyUp({ keyCode: 40 });
+              }}
+            >
+              <ArrowDownward color="primary" />
+            </div>
+          </div>
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>
