@@ -3,12 +3,8 @@ import {
   Checkbox,
   Dialog,
   DialogContent,
-  FormControl,
   FormControlLabel,
   IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
   Tooltip,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
@@ -44,7 +40,7 @@ export const Audio = () => {
     const volume = volumeMusic / 100;
     music.volume = volume;
   }, [volumeMusic, music]);
-  console.log(music);
+
   if (isPlayMusic) {
     music.play();
   } else {
@@ -69,7 +65,7 @@ export const Audio = () => {
             openSettings();
           }}
         >
-          <Settings />
+          <Settings className={classMaterial.settings} />
         </IconButton>
       </Tooltip>
       <Dialog
@@ -80,20 +76,6 @@ export const Audio = () => {
         }}
       >
         <DialogContent className={classMaterial.dialog}>
-          <FormControl className="form-control">
-            <InputLabel>{'Language'}</InputLabel>
-            <Select
-            // onClick={() => playSound(isSoundOn)}
-            // value={language}
-            // onChange={(event: any) => changeLanguages(event.target.value)}
-            >
-              <MenuItem>English</MenuItem>
-              <MenuItem>Русский</MenuItem>
-              <MenuItem>Deutsche</MenuItem>
-              <MenuItem>Italiano</MenuItem>
-              <MenuItem>Português</MenuItem>
-            </Select>
-          </FormControl>
           <Box className={classMaterial.box}>
             <FormControlLabel
               className={classMaterial.label}

@@ -18,6 +18,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  settings: {
+    color: 'white',
+  },
   label: {
     width: '100px',
     marginLeft: '0px',

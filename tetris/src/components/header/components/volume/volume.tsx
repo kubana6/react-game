@@ -9,6 +9,7 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 const useStyles = makeStyles({
   root: {
     width: 120,
+    fontFamily: 'Pixel, Arial, Helvetica, sans-serif',
   },
 });
 interface typeVolume {

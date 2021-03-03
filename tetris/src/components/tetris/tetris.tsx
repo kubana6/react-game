@@ -5,7 +5,7 @@ import {
   ArrowUpward,
 } from '@material-ui/icons';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SOUND_GAME_OVER } from '../../constants';
 import { checkCollision, createStage } from '../../gameHelpers';
 import { useGameStatus } from '../../hocks/useGameStatus';
@@ -17,7 +17,7 @@ import { createAudio } from '../header/components/audio/createAudio';
 import { Stage } from '../stage/Stage';
 import { StartButton } from '../StartButton/StartButton';
 import { StyledTetris, StyledTetrisWrapper } from './styleTetris';
-
+import { postUserScores } from '../../redux/reducers/scoresReducers';
 export const Tetris: React.FC = ({ type }: any) => {
   const [dropTime, setDropTime] = useState<null | number>(null);
   const [gameOver, setGameOver] = useState(false);
@@ -26,11 +26,13 @@ export const Tetris: React.FC = ({ type }: any) => {
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
     rowsCleared
   );
+  const dispatch = useDispatch();
   const movePlayer = (dir: number): void => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
     }
   };
+  const { email } = useSelector((state: any) => state.auth.currentUser);
   const { isPlaySound, volumeSound, sound, interval } = useSelector(
     (state: any) => state.audioReducers
   );
@@ -56,6 +58,12 @@ export const Tetris: React.FC = ({ type }: any) => {
       if (player.pos.y < 1) {
         console.log('gameOver');
         setGameOver(true);
+        const data = {
+          id: 1,
+          login: email,
+          scores: score,
+        };
+        dispatch(postUserScores(data));
         if (isPlaySound) {
           createAudio(SOUND_GAME_OVER, volumeSound);
         }
@@ -114,9 +122,6 @@ export const Tetris: React.FC = ({ type }: any) => {
     >
       <StyledTetris>
         <Stage stage={stage} />
-        <div>
-          <ArrowBack />
-        </div>
         <aside>
           {gameOver ? (
             <Display gameOver={gameOver} text="Game Over" />

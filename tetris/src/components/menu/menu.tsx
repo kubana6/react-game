@@ -7,9 +7,15 @@ export const Menu: React.FC = () => {
   return (
     <div className={classMaterial.menu}>
       Menu
-      <NavLink to="/start">Start Game</NavLink>
-      <NavLink to="/score">Score</NavLink>
-      <NavLink to="/settings">Settings</NavLink>
+      <NavLink className={classMaterial.link} to="/start">
+        Start Game
+      </NavLink>
+      <NavLink className={classMaterial.link} to="/allscore">
+        Score
+      </NavLink>
+      <NavLink className={classMaterial.link} to="/settings">
+        Settings
+      </NavLink>
     </div>
   );
 };

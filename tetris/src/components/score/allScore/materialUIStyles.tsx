@@ -1,9 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
-  menu: {
-    width: '300px',
-    height: '300px',
+  allScores: {
+    width: '400px',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#edeeef',
@@ -13,9 +12,25 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  link: {
+  place: {
     fontSize: '16px',
-    textDecoration: 'none',
     color: 'black',
+    width: '15px',
+    marginBottom: '10px',
+  },
+  player: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '14px',
+    justifyContent: 'space-around',
+    textAlign: 'center',
+  },
+  login: {
+    width: '100px',
+  },
+  score: {
+    width: '50px',
+    textAlign: 'center',
   },
 }));
