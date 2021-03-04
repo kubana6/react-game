@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <div className={classes.footer}>
       <div className={classes.github}>
-        <a href="https://github.com/kubana6"> Make by Anton Lappo</a>
+        <a href="https://github.com/kubana6"> Made by Anton Lappo</a>
       </div>
       <div className={classes.rss}>
         <a href="https://rs.school/js/">
