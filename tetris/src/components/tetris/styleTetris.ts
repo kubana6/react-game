@@ -14,7 +14,10 @@ export const StyledTetris = styled.div`
   height: 100%;
   aside {
     width: 30%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
     padding: 0 20px;
   }
   .keyBoard {
