@@ -5,13 +5,14 @@ export const StyledStartButton = styled.button`
   margin: 0 0 20px 0;
   padding: 20px;
   min-height: 30px;
-  width: 100%;
+  width: 200px;
   border-radius: 20px;
   border: none;
   color: white;
   background: #333;
   font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+  min-height: 20px;
   outline: none;
+  font-size: 16px;
   cursor: pointer;
 `;

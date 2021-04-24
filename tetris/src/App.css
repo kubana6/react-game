@@ -1,5 +1,12 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: url('./img/galaktika.jpg') #000;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .App-logo {
